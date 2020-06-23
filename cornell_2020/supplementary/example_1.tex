@@ -1,0 +1,83 @@
+\begin{subfigure}{0.325\columnwidth}
+\footnotesize
+\(
+\def\arraystretch{1.858}
+\begin{array}{@{}l}
+\textrm{Tracing state} \\
+\hline
+c = \tUnk\tikzmark{if1-mark1}, \cont = \cdot \\
+\hline
+c = \tUnk, \cont = \contcase{ifTrue}(x\tOp{<}\tOp{\num{0}},\tikzmark{if1-mark2}\tUnk,\cdot) \tikzmark{ex-if-ifTrue-cfg}  \\
+\hline
+c = y\tOp{=}x\tOp{*}\tOp{\num{-1}}\tOp{;}, \cont = \contcase{ifTrue}(x\tOp{<}\tOp{\num{0}},\tikzmark{if1-mark3}\tUnk,\cdot) \tikzmark{ex-if-ifTrue-set-cfg}  \\
+\hline
+c = \tKw{if}\tOp{(}x\tOp{<}\tOp{\num{0}}\tOp{)}y\tOp{=}x\tOp{*}\tOp{\num{-1}}\tOp{;}\tKw{else}\tUnk\tikzmark{if1-mark4}, \cont = \cdot \tikzmark{ex-if-pop-cfg-1} \\
+\end{array}
+\)
+  
+\caption{First execution.}
+\label{if-example-output-1}
+
+\end{subfigure}
+\vrule
+\begin{subfigure}{0.24\columnwidth}
+\lstset{language=JavaScript}
+\begin{lstlisting}[
+  numbers=none,
+  numbersep=0pt,
+  resetmargins=true,
+  linebackgroundcolor={%
+  \ifnum\value{lstnumber}=2\color{gray!30}\fi
+  \ifnum\value{lstnumber}=3\color{gray!30}\fi
+  \ifnum\value{lstnumber}=6\color{gray!30}\fi
+  \ifnum\value{lstnumber}=7\color{gray!30}\fi
+  \ifnum\value{lstnumber}=10\color{gray!30}\fi
+  }]
+#\jsKw{if}~\jsOp{(}x\jsOp{<}\jsOp{0}\jsOp{)}~\jsOp{\{}#
+  #\tikzmark{ex-if-ifTrue-lhs}\rtsFun{ifTrue}{\llbracket x\tOp{<}\tOp{\num{0}}\rrbracket}\jsOp{;}#
+  #\tikzmark{ex-if-ifTrue-set-lhs}\rtsFun{set}{\llbracket y \rrbracket, \llbracket x\tOp{*}\tOp{\num{-1}}\rrbracket}\jsOp{;}#
+  #y~\jsOp{=}~x~\jsOp{*}~\jsOp{-1}\jsOp{;}#
+#\jsOp{\}}~\jsKw{else}~\jsOp{\{}#
+  #\rtsFun{traceIfFalse}{\llbracket x\tOp{<}\tOp{\num{0}}\rrbracket}\jsOp{;}##\tikzmark{ex-if-ifFalse-rhs}#
+  #\rtsFun{set}{\llbracket y \rrbracket, \llbracket x\rrbracket}\jsOp{;}##\tikzmark{ex-if-ifFalse-set-rhs}#
+  #y~\jsOp{=}~x\jsOp{;}#
+#\jsOp{\}}#
+#\tikzmark{ex-if-pop-lhs}\rtsFun{pop}{}\jsOp{;}##\tikzmark{ex-if-pop-rhs}#
+\end{lstlisting}
+
+\caption{Program.}
+\label{if-example-traced}
+
+%if (x < 0) {
+%  #\tikzmark{ex-if-ifTrue-lhs}\rtsFun{ifTrue}{\llbracket x\tOp{<}0\rrbracket}#;
+%  #\tikzmark{ex-if-ifTrue-set-lhs}\rtsFun{set}{\llbracket y \rrbracket, \llbracket x - 1\rrbracket}#;
+%  y = x * -1;
+%} else {
+%  #\rtsFun{traceIfFalse}{\llbracket x\tOp{<}0\rrbracket}#;#\tikzmark{ex-if-ifFalse-rhs}#
+%  #\rtsFun{set}{\llbracket y \rrbracket, \llbracket x\rrbracket}#;#\tikzmark{ex-if-ifFalse-set-rhs}#
+%  y = x;
+%}
+%#\tikzmark{ex-if-pop-lhs}\rtsFun{pop}{}#;#\tikzmark{ex-if-pop-rhs}#
+
+\end{subfigure}
+\vrule\,\,
+\begin{subfigure}{0.34\columnwidth}
+\footnotesize
+\(
+\def\arraystretch{1.858}
+\begin{array}{@{}l}
+\textrm{Tracing state} \\
+\hline
+c = \tKw{if}\tOp{(}x\tOp{<}\tOp{\num{0}}\tOp{)}y\tOp{=}x\tOp{*}\tOp{\num{-1}}\tKw{else}\tikzmark{if2-mark1}\tUnk,
+\cont = \cdot \\
+\hline
+\tikzmark{ex-if-ifFalse-cfg}c = \tUnk\tikzmark{if2-mark2},
+\cont = \contcase{ifFalse}(x\tOp{<}\tOp{\num{0}},y\tOp{=}x\tOp{*}\tOp{\num{-1}},\cdot)  \\
+\hline
+\tikzmark{ex-if-ifFalse-set-cfg}c = y\tOp{=}x;,
+\cont = \contcase{ifFalse}(x\tOp{<}\tOp{\num{0}},y\tOp{=}x\tOp{*}\tOp{\num{-1}},\cdot) \\
+\hline
+\tikzmark{ex-if-pop-cfg-2}c = \tKw{if}\tOp{(}x\tOp{<}\tOp{\num{0}}\tOp{)}y\tOp{=}x\tOp{*}\tOp{\num{-1}}\tOp{;}\tKw{else}y\tOp{=}x\tOp{;},
+\cont = \cdot \\
+\end{array}
+\)

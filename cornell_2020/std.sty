@@ -1,8 +1,105 @@
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage{skull}
+\usepackage{listings}
+\usepackage{graphics}
+
 % theme
-%\usetheme{Madrid}
+%\usetheme{Copenhagen}
 \definecolor{UMassMaroon}{rgb}{0.54117647059, 0.10980392157, 0.10980392157}
 \usecolortheme[named=UMassMaroon]{structure}
 
 % navigation bar
 \beamertemplatenavigationsymbolsempty
 \setbeamertemplate{footline}[frame number]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code formatting.                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinelanguage{rust}{
+  sensitive=false,
+  morekeywords={},
+  keywordstyle=\ttfamily\bfseries,
+  identifierstyle=\ttfamily,
+  comment=[l]{//},
+  commentstyle=\ttfamily,
+  string=[d]{"},
+  stringstyle=\ttfamily,
+  mathescape=false,
+  escapechar=\@,
+  extendedchars=true,
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+  numbers=none,
+  firstnumber=0,
+  numberstyle=\small,
+  stepnumber=5,
+  numbersep=5pt,
+  upquote=true,
+  columns=fixed,
+  flexiblecolumns=true}
+
+\lstdefinelanguage{JavaScript}{
+  sensitive=false,
+  morekeywords={},
+  keywordstyle=\ttfamily,
+  identifierstyle=\ttfamily,
+  comment=[l]{//},
+  commentstyle=\ttfamily,
+  string=[d]{"},
+  stringstyle=\ttfamily,
+  mathescape=true,
+  escapechar=\#,
+  extendedchars=true,
+  literate={UNK}{{\tUnk}}1,
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+  numbers=none,
+  firstnumber=0,
+  numberstyle=\small,
+  stepnumber=5,
+  numbersep=5pt,
+  upquote=true,
+  columns=fixed,
+  flexiblecolumns=true}
+
+\lstset{language=JavaScript}
+
+\newcommand{\dollar}{\mbox{\textdollar}}
+
+\newcommand{\jscolorname}{blue}
+\newcommand{\jscolor}{\color{\jscolorname}}
+
+\newcommand{\tcolor}{\color{red}}
+\newcommand{\tUnk}{\ensuremath{\tcolor\skull\color{black}}}
+
+% JS Keywords
+\newcommand{\tKw}[1]{\text{\texttt{\tcolor\textbf{#1}}}}
+\newcommand{\tOp}[1]{\text{\texttt{\tcolor#1}}}
+\newcommand{\tId}[1]{\text{\texttt{\textsf{#1}}}}
+\newcommand{\tBlk}{\ensuremath{\mathit{tblk}}}
+\newcommand{\tLval}{\ensuremath{\mathit{tlv}}}
+\newcommand{\tAddr}{\ensuremath{\mathit{a}}}
+\newcommand{\jsExpr}{\ensuremath{e}}
+\newcommand{\jsStmt}{\ensuremath{s}}
+\newcommand{\jsParam}{\ensuremath{x}}
+\newcommand{\jsBlk}{\ensuremath{\mathit{blk}}}
+\newcommand{\jsB}{\ensuremath{b}}
+\newcommand{\jsLabel}[1]{\ensuremath{#1}}
+\newcommand{\jsKw}[1]{\text{\texttt{\jscolor\textbf{#1}}}}
+\newcommand{\jsOp}[1]{\text{\texttt{\jscolor#1}}}
+\newcommand{\rtsFunName}[1]{\ensuremath{\textsf{#1}}}
+\newcommand{\rtsFun}[2]{\ensuremath{\textsf{#1}(#2)}}
+\newcommand{\astRep}[1]{\llbracket #1 \rrbracket}
+\newcommand{\compileStmt}{\ensuremath{\mathcal{S}}}
+\newcommand{\compileExpr}{\ensuremath{\mathcal{E}}}
+\newcommand{\compileLVal}{\ensuremath{\mathcal{L}}}
+\newcommand{\env}{\ensuremath{\rho}}
+\newcommand{\cont}{\ensuremath{\kappa}}
+\newcommand{\contcase}[1]{\ensuremath{\textsc{#1}}}
+\newcommand{\cons}{::}
+\newcommand{\tHandler}[3]{\ensuremath{\tKw{handler}\tOp{(}\tKw{envId}\tOp{:}#1\tOp{,}\tKw{argId}\tOp{:}#2,\tKw{body}\tOp{:}#3\tOp{)}}}
+\newcommand{\tEvent}[4]{\ensuremath{\tKw{event}\tOp{(}#1\tOp{,}#2\tOp{,}#3\tOp{,}#4\tOp{)}}}
+\newcommand{\tEnvid}{\ensuremath{\mathit{env}}}
+\newcommand{\tRetlabel}{\ensuremath{\mathit{ret}}}
+% https://github.com/plasma-umass/arjun-papers/blob/6213a3d6ff8d715848a4c3b3220579b53c11903e/jsBots/pervasives.sty#L80

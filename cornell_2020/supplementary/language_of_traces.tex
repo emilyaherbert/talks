@@ -1,0 +1,57 @@
+\(
+\begin{array}{@{}r@{\,}c@{\,}ll@{}r@{}}
+\multicolumn{4}{@{}l}{\textbf{Set of traced event-handlers}} \\
+T & ::= & n \rightharpoonup h \\
+\multicolumn{4}{@{}l}{\textbf{Events}} \\
+\mathit{ev}   & ::=  & \multicolumn{2}{@{\,}l}{\texttt{'listen'} \mid \texttt{'get'} \mid \texttt{'post'} \mid \cdots} \\
+\multicolumn{4}{@{}l}{\textbf{Event Handler}} \\
+h & ::= & \multicolumn{2}{@{\,}l}{\tHandler{x}{x}{t}} \\
+\multicolumn{4}{@{}l}{\textbf{l-values}} \\
+\tLval & ::=  & x              & \textrm{Variable} \\
+\cline{1-4} \multicolumn{1}{@{}l}{\vline}
+       & \mid & \tOp{*}t\tOp{.}x & \textrm{Variable in environment} & \vline \\
+\multicolumn{3}{@{}l}{\vline \textbf{Addresses}} & & \vline \\
+\multicolumn{1}{@{}l}{\vline \tAddr} 
+      & ::=  & t\tOp{.}x & \textrm{Address in environment} & \vline \\
+\multicolumn{1}{@{}l}{\vline}
+      & \mid & \tOp{\&}x & \textrm{Address of variable} & \vline \\
+\cline{1-4}
+\multicolumn{4}{@{}l}{\textbf{Blocks}} \\
+\tBlk & ::= & \tOp{\{}~t_1 \cdots t_n\tOp{\}} \\
+\multicolumn{4}{@{}l}{\textbf{Trace trees}} \\
+t & ::=  & c & \textrm{Constant} \\
+  & \mid & x                & \textrm{Variable} \\
+  & \mid & t_1~\mathit{op}~t_2 & \textrm{Binary operation}  \\
+  & \mid & \tBlk
+         & \textrm{Block} \\
+  & \mid & \tKw{if}~\tOp{(}t_1\tOp{)}~t_2~\tKw{else}~t_3
+         & \textrm{Conditionals} \\
+  & \mid & \tKw{while}~\tOp{(}t_1\tOp{)}~\tBlk
+          & \textrm{Loops} \\
+  & \mid & \tKw{let}~x~\tOp{=}~t\tOp{;} & \textrm{Variable declaration} \\
+  & \mid & \tLval~\tOp{=}~t\tOp{;} & \textrm{Assignment} \\
+  & \mid & \tBlk
+         & \textrm{Block} \\
+  & \mid & \ell\tOp{:} t
+         & \textrm{Labelled trace} \\
+  \cline{1-4} \multicolumn{1}{@{}l}{\vline}
+  & \mid & \tUnk{}
+  & \textrm{Unknown behavior} & \vline \\
+  \multicolumn{1}{@{}l}{\vline}
+  & \mid & \tKw{break}~\ell~t\tOp{;}
+  & \textrm{Break with value} & \vline \\
+  \multicolumn{1}{@{}l}{\vline}
+  & \mid & \tEvent{\mathit{ev}}{t_{\mathit{arg}}}{t_{\mathit{env}}}{n}
+  & \textrm{Event handler} & \vline \\
+  \multicolumn{1}{@{}l}{\vline}
+  & \mid & \tKw{respond}\tOp{(}t\tOp{)}
+  & \textrm{Response} & \vline \\
+  \multicolumn{1}{@{}l}{\vline}
+  & \mid & \tKw{env}\tOp{(}x_1\tOp{:}\tAddr_1\tOp{,}\cdots\tOp{,}x_n\tOp{:}\tAddr_n\tOp{)}
+  & \textrm{Environment object} & \vline \\
+  \multicolumn{1}{@{}l}{\vline}
+  & \mid & \tOp{*}t\tOp{.}x
+  & \textrm{Value in environment} & \vline \\
+  \cline{1-4}
+\end{array}
+\)
